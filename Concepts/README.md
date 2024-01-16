@@ -182,6 +182,11 @@ console.log(this.a) // 10
 console.log(x) // ReferenceError: x is not defined
 ```
 
+```js 
+null == undefined // true 
+null === undefined // false
+```
+
 ---
 
  * `null`: assignment value given to a variable. The variable which has been assigned to `null` has no value.
@@ -213,3 +218,21 @@ console.log(x) // ReferenceError: x is not defined
   console.log(x); // ReferenceError: cannot access 'x' before initialization
   let x = 10;
   ```
+
+  `const`: 
+
+In JavaScript, the `const` keyword is used to declare a constant variable, meaning a variable whose value cannot be reassigned once it has been initialized. Constants are block-scoped, like variables declared with let.
+
+**Immutability**:  Once a value is assigned to a const variable, it cannot be changed or reassigned. Any attempt to reassign a value to a const variable results in a `TypeError`. 
+
+```js
+const PI = 3.14;
+PI = 3.14159; // TypeError: Assignment to constant variable.
+```
+
+```js
+const a; // SyntaxError: Missing initializer in const declaration
+a = 10;
+```
+
+---

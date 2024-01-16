@@ -6,6 +6,8 @@
 | 2. | [Call stack](#call-stack)
 | 3. | [Hoisting](#hoisting)
 | 4. | [Shortest JS Program](#shortest-js-program)
+| 5. | [undefined Not-Defined null](#undefined-not-defined-null)
+| 6. | [let and Const](#let-and-const)
 
 
 ### Execution Context
@@ -164,3 +166,50 @@ console.log(a) // 10
 console.log(window.a); // 10  
 console.log(this.a) // 10
 ```
+
+5. ### Undefined Not-defined Null
+
+ * `undefined`:  In JavaScript, `undefined` is a primitive value and a type. It indicates that a variable has been declared but has not been assigned a value. Additionally, it can be the default value of function parameters that are not provided.
+
+ ```js
+  var x; 
+  typeof(x) // undefined
+ ```
+---
+* `not defined`: The term "not defined" is often used when a variable or identifier is used without being declared at all. This results in a ReferenceError.
+
+```js
+console.log(x) // ReferenceError: x is not defined
+```
+
+---
+
+ * `null`: assignment value given to a variable. The variable which has been assigned to `null` has no value.
+ * When we assign null as a value to any variable, it means that it is empty or blank. It is to show that the variable has no value.
+ * Also, null is an **object** in JavaScript. 
+
+ ```js
+ var x = null
+ typeof(null) // object
+ ```
+
+ ---
+
+ 6. ### Let and Const
+
+  `let`: 
+  * `let` declarations are scoped to blocks as well as functions.
+  * `let` is **hoisted** in JavaScript, but it behaves differently compared to `var`. When a variable is hoisted with `let`, it is hoisted to the top of its block, but it is not initialized (assigned a value) until the actual declaration statement is encountered in the code. This is known as the **temporal dead zone.**
+  * `let` declarations do not create properties on `globalThis` when declared at the top level of a script.
+  * `let` declarations cannot be redeclared by any other declaration in the same scope.
+
+  ![demo10](/assets/demo10.png)
+
+  #### Temporal Dead Zone
+
+  The **temporal dead zone (TDZ)** is a specific period in the execution of JavaScript code where variables declared with `let` and `const` exist but cannot be accessed or assigned any value. During this phase, accessing or using the variable will result in a ReferenceError.
+
+  ```js
+  console.log(x); // ReferenceError: cannot access 'x' before initialization
+  let x = 10;
+  ```

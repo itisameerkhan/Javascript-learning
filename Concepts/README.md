@@ -11,6 +11,8 @@
 | 7. | [Block Statement](#block-statement)
 | 8. | [Closures](#closures)
 
+---
+
 ### Execution Context
     
 Everything happens inside a Execution context

@@ -528,7 +528,7 @@ setTimeout(function() {
 },5000);
 ```
 
-This function executed after 5 seconds, moreover also this function pushed into the `callback` 
+This function executed after 5 seconds, moreover also this function pushed into the `callstack` 
 
 ![callback](/assets/callback.png)
 

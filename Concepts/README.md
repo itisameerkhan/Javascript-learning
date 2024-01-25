@@ -581,7 +581,92 @@ The `handleClick` function is also a callback function. It is passed as an argum
 
 11. ## Event Loop
 
+### Web APIs
 
+* setTimeout()
+* DOM APIs
+* fetch()
+* localStorage
+* console
+* location
+
+```js
+console.log("start");
+
+setTimeout(function callback() {
+  console.log("callback function")
+}, 5000);
+
+console.log("end")
+```
+
+output:
+```
+start
+end
+callback function
+```
+
+* ###  step  1
+
+Global Execution context is created and push it into the callstack and the code gets executed synchronously.
+
+![el1](/assets/el1.png)
+
+#### console
+```
+start
+```
+
+* ### Step 2
+
+ `setTimeout` function register timer in WEB APIs with delay of 5000 milliseconds
+
+ ![dl2](/assets/el2.png)
+
+
+
+* ### Step 3 
+
+after reaches line 3 
+
+### console
+```
+start
+end
+```
+
+### Step 4 
+
+After complete execution of global execution context, then its pops out of **callstack** but still the timer stills running
+
+![el3](/assets/el3.png);
+
+### Step 5
+
+after timer runs out. `callback` function pops out, then push into callback queue.
+
+![el4](/assets/el4.png)
+
+#### Step 6
+
+ **Event loop** checks for the `callback  queue` it there anything to execute, if its finds function and push it into the `callstack`.
+
+ ![el6](/assets/el6.png)
+
+ **console**
+
+ ```
+ start
+ end
+ callback function
+ ```
+
+ ###  Step 7 
+
+ `callback` function pops out of callstack
+
+ ![el8](/assets/el7.png)
 
 [🔝Back to Top](#concepts)
 

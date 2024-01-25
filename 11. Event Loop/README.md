@@ -175,3 +175,7 @@ The **Microtask queue has a higher priority than the callback queue** which mean
   | 1. | is a queue that holds tasks scheduled to be executed after the current task completes. |  is a queue specifically designed for handling microtasks.
   | 2. |  Handles general asynchronous tasks and callbacks, often associated with I/O operations, timers, and events. | Specifically designed for microtasks, which are tasks with higher priority than regular tasks. Common sources include promises, mutation observers, and certain APIs.
   ---
+
+  ### Links
+
+  [✨♻️ Visualizing JavaScript: Event Loop](https://medium.com/@masterrajpatel/%EF%B8%8F-visualizing-javascript-event-loop-5d5e00ddbde0)

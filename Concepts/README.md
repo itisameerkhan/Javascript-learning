@@ -12,6 +12,7 @@
 | 8. | [Closures](#closures)
 | 9. | [First Class Functions](#first-class-functions)
 | 10.| [Callback Functions](#callback-functions)
+| 11.| [Event Loop](#event-loop)
 
 ---
 
@@ -561,6 +562,26 @@ The `handleClick` function is also a callback function. It is passed as an argum
 ![callback](/assets/callback2.png)
 
 ### Garbage Collection & removeEventListeners
+
+1. #### Garbage Collections
+
+  * Garbage collection is the process of automatically detecting and freeing up memory occupied by objects that are no longer reachable or in use by the program.
+
+  * If memory occupied by unused objects is not released, it can lead to memory leaks. Garbage collection helps prevent memory leaks by identifying and releasing memory that is no longer needed.
+
+  * By automatically managing memory, garbage collection reduces the chances of the program running out of memory. It allows developers to focus on writing code rather than manually managing memory, improving productivity.
+
+2. #### removeEventListener
+
+  * Event listeners, when not removed properly, can lead to memory leaks. If an object with an attached event listener is not removed, it stays in memory even if it's no longer needed, preventing garbage collection.
+
+[🔝Back to Top](#concepts)
+
+---
+
+11. ## Event Loop
+
+
 
 [🔝Back to Top](#concepts)
 

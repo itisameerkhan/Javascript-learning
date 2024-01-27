@@ -6,7 +6,7 @@ V8 is Google’s open source high-performance **JavaScript** and **WebAssembly**
 
 ## Javascript Runtime Environment
 
-![demo13](/assets/demo13.jpg)
+![demo13](/assets/demo19.webp)
 
 The JavaScript runtime environment is the environment in which JavaScript code is executed. It consists of the combination of the browser (in the case of client-side JavaScript) or the server (in the case of server-side JavaScript, like Node.js) and the JavaScript engine.
 

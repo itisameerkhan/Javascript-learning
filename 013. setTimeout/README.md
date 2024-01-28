@@ -1,4 +1,4 @@
-# setTimeout
+# setTimeout ⏰
 
 `setTimeout` is a function in JavaScript used to schedule the execution of a specified function or piece of code after a specified amount of time has elapsed. It allows you to introduce delays in the execution of code.
 

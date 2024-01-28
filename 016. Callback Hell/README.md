@@ -1,4 +1,4 @@
-# Callback 
+# 💫 Callback 
 
 ![demo](/assets/demo21.png)
 
@@ -104,7 +104,7 @@ Callback hell, also known as **"pyramid of doom"** or **"callback spaghetti,"** 
  This typically occurs when dealing with **asynchronous** operations, such as making API requests or handling file I/O, **where one operation depends on the result of another or previous One.**
 
 
-## Risk on Callback Functions
+## 💫 Risk on Callback Functions
 
 ```js
 const cart = ["shoes", "pants", "kurtas"];
@@ -122,7 +122,7 @@ api.createOrder(cart, function() {
 
 ---
 
-## Two issues while using callbacks
+## 💫 Two issues while using callbacks
 
 ### 1 - Callback hell
 
@@ -135,7 +135,7 @@ The callback function is passed to another callback, this way we lose the contro
 That process is called inversion of control. 
 
 
-## Escaping callback Hell
+## 💫 Escaping callback Hell
 
 **To escape callback hell, Javascript developer adopted various techniques and patterns**
 
@@ -144,6 +144,6 @@ That process is called inversion of control.
 2. **🔥 2. Embrace the Power of Async/Await**
 
 
-## Articles 🌐
+## 🌐 Articles 
 
 * [Callback Hell in JavaScript : All You Need to Know](https://medium.com/@raihan_tazdid/callback-hell-in-javascript-all-you-need-to-know-296f7f5d3c1)

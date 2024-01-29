@@ -87,8 +87,10 @@ After sometime when the `Promise` object is Resolved either `fulfilled` or `reje
 In my case it resolved into `fulfilled`
 
 ![demo](/assets/demo26.png)
+---
 
 ### ✨ `Promise {<pending>}`  but `state: fulfilled`?
+
 
 When the code executed the `line:2` which returns a `Promise`, in this case which is in `pending` state. while the `Promise` being resolve, the code moves to `line:3`  to `console.log` the current state of the `Promise`. 
 
@@ -145,7 +147,7 @@ user.then(function(data) {
     console.log(json);
 })
 ```
-In this case we return another `Promise` from response with JSON format to get the JSON data.
+In this case, `response.json()` returns a `Promise` that resolves to the parsed JSON data, and the second `.then()` block handles that data.
 
 ![demo](/assets/demo28.png)
 

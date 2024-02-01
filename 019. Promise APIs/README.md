@@ -34,6 +34,63 @@ If any promise in the iterable rejects, the returned promise rejects with the re
 Promise.all(iterable);
 ```
 
+### ✨ Code snippet - All Success
+
+```js
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('p1 success');
+    }, 3000);
+})
+
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('p2 success');
+    }, 1000);
+})
+
+const p3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('p3 success');
+    }, 2000);
+})
+
+Promise.all([p1, p2, p3]).then((res) => { console.log(res) })
+```
+
+### output
+
+![demo](/assets/demo37.png)
+
+
+### ✨ Code snippet - if one promises fail
+
+```js
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('p1 success');
+    }, 3000);
+})
+
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        reject('p2 Failed');
+    }, 1000);
+})
+
+const p3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('p3 success');
+    }, 2000);
+})
+
+Promise.all([p1, p2, p3])
+.then((res) => { console.log(res) })
+.catch((err) => { console.error(err); })
+```
+
+![demo](/assets/demo38.png)
+
 ### ✨ consider this scenario. 
 
 ```js
@@ -108,6 +165,34 @@ Each result object in the array has the following properties:
 
 * **value**: The fulfillment value if the promise was fulfilled, or the rejection reason if the promise was rejected.
 
+### ✨ Example 
+
+```js
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('p1 success');
+    }, 3000);
+})
+
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        reject('p2 Failed');
+    }, 1000);
+})
+
+const p3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('p3 success');
+    }, 2000);
+})
+
+Promise.allSettled([p1, p2, p3])
+.then((res) => { console.log(res) })
+.catch((err) => { console.error(err); })
+```
+
+![demo](/assets/demo39.png)
+
 ### ✨ Consider this example
 
 ```js
@@ -156,6 +241,35 @@ Irrespective of success or failure, it will give you all the results.
 ```js
 Promise.allSettled([p1, p2, p3]);
 ```
+
+### ✨ Code snippet 
+
+```js
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('p1 success');
+    }, 3000);
+})
+
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        reject('p2 Failed');
+    }, 5000);
+})
+
+const p3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('p3 success');
+    }, 2000);
+})
+
+Promise.race([p1, p2, p3])
+.then((res) => { console.log(res) })
+.catch((err) => { console.error(err); })
+```
+
+![demo](/assets/demo40.png)
+
 ### ✨ Success case ✅ 
 
 In this above code p1, p2, p3 are promises trying to resolve,
@@ -193,3 +307,99 @@ output
 ```js
 ERROR FROM P2
 ```
+
+## ⭐ `Promise.any()`
+
+`Promise.any()` is a static method of the Promise object introduced in ECMAScript 2021 (ES2021) that takes an iterable (like an array) of promises as input and returns a single new promise. Unlike `Promise.all()`, which waits for all input promises to settle (resolve or reject), `Promise.any()` fulfills when any of the input promises fulfills, with its fulfilled value. It rejects only if all input promises reject.
+
+> It waits for the first promise to fulfill.
+
+### ✨ Fulfillment:
+
+* The returned promise resolves with the fulfilled value of the first promise to fulfill.
+
+* It doesn't wait for other promises to settle after one fulfills.
+
+### ✨ Rejection:
+
+* The returned promise rejects with an `AggregateError` if all input promises reject. This error contains an array of rejection reasons from each rejected promise.
+
+```js
+Promise.any([p1, p2, p3]);
+```
+
+### ✨ Code snippet 
+
+```js
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('p1 success');
+    }, 3000);
+})
+
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        reject('p2 Failed');
+    }, 1000);
+})
+
+const p3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('p3 success');
+    }, 2000);
+})
+
+Promise.any([p1, p2, p3])
+.then((res) => { console.log(res) })
+.catch((err) => { console.error(err); })
+```
+
+![demo](/assets/demo41.png)
+
+### ✨ what if all promises are rejected
+
+```js
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        // resolve('p1 success');
+        reject('p1 failed');
+    }, 1000);
+})
+
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        reject('p2 failed');
+        // resolve('p2 success');
+    }, 1000);
+})
+
+const p3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        // resolve('p3 success');
+        reject('p3 failed');
+    }, 1000);
+})
+
+Promise.any([p1, p2, p3])
+.then((res) => { console.log(res) })
+.catch((err) => { console.error(err); })
+```
+![demo](/assets/demo42.png)
+
+### ✨ Success case ✅ 
+
+In this above code p1, p2, p3 are promises trying to resolve,
+
+* `p1`: takes 3 seconds to resolve.
+
+* `p2`: takes 1 seconds to resolve. 
+
+* `p3`: takes 2 seconds to resolve.
+
+**output: value of p2**
+
+if `p2` gets rejected, it waits for another promise to success.
+which is `p3`. if `p3` is failed again it wait for another success which is `p1`.
+
+if All promises are rejected, then returns `AggregateError`.
+which is array of all error [error1, error2, error3].

@@ -248,3 +248,27 @@ createOrder(cart)
 })
 ```
 
+## ⭐ MicroTasks and (Macro)tasks
+
+Okay so we know a little better how to create a promise and how to extract values out of a promise. Let's add some more code to the script, and run it again
+
+![demo](/assets/demo31.gif)
+
+First, `Start`! got logged. Okay we could've seen that one coming: `console.log('Start!')` is on the very first line! However, the second value that got logged was `End`!, and not the value of the resolved promise! Only after End! was logged, the value of the promise got logged. What's going on here?
+
+We've finally seen the true power of promises! 🚀 Although JavaScript is single-threaded, we can add asynchronous behavior using a Promise!
+
+Yes! However, within the Event Loop, there are actually two types of queues: the **callback** queue, and the **microtask** queue. The  callback is for (macro)tasks and the microtask queue is for microtasks.
+
+| (Macro)task	| setTimeout | setInterval | setImmediate
+| --- | --- | --- | --- |
+| **Microtask** | 	**process.nextTick** | **Promise callback** | **queueMicrotask**
+
+
+Ahh, we see Promise in the microtask list! 😃 When a Promise resolves and calls its `then()`, `catch()` or `finally()`, method, the callback within the method gets added to the microtask queue! This means that the callback within the `then()`, `catch()` or `finally()` method isn't executed immediately, essentially adding some async behavior to our JavaScript code!
+
+1. All functions in that are currently in the call stack get executed. When they returned a value, they get popped off the stack.
+
+2. When the call stack is empty, all queued up microtasks are popped onto the callstack one by one, and get executed! (Microtasks themselves can also return new microtasks, effectively creating an infinite microtask loop 😬)
+
+3. If both the call stack and microtask queue are empty, the event loop checks if there are tasks left on the (macro)task queue. The tasks get popped onto the callstack, executed, and popped off!

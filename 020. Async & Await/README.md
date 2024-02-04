@@ -73,7 +73,8 @@ What if return promise from `async` function will it wraps into another promise 
 
 The `await` keyword is used to pause the execution of an asynchronous function until the Promise is resolved, and it returns the resolved value.
 
-> 📝 `await` keyword is only being used inside the `async` function. `await` used before the Promise.
+>[!NOTE]\
+> `await` keyword is only being used inside the `async` function. `await` used before the Promise.
 
 ```js
 const p = new Promise((resolve, reject) => {
@@ -276,6 +277,95 @@ something - 4
 something - 1
 something - 5
 >>> (after 5 seconds)
+something - 2
+Promise resolved value
+something - 3
+Promise resolved value
+```
+
+### 💻 Consider this example
+
+```js
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Promise resolved value');
+    },5000);
+});
+
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Promise resolved value');
+    },10000);
+});
+
+async function handlePromise() {
+    console.log('something - 1');
+    const result = await p1;
+    console.log('something - 2');
+    console.log(result);   
+    
+    const result2 = await p2;
+    console.log('something - 3');
+    console.log(result2);    
+} 
+
+console.log('something - 4');
+handlePromise();
+console.log('something - 5');
+```
+
+### 💻 Output
+
+```
+something - 4
+something - 1
+something - 5
+>>> (after 5 seconds)
+something - 2
+Promise resolved value
+>>> (after 5 seconds)
+something - 3
+script.js:21 Promise resolved value
+```
+
+### 💻 Consider this example
+
+```js
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Promise resolved value');
+    },5000);
+});
+
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('Promise resolved value');
+    },10000);
+});
+
+async function handlePromise() {
+    console.log('something - 1');
+    const result = await p2;
+    console.log('something - 2');
+    console.log(result);   
+    
+    const result2 = await p1;
+    console.log('something - 3');
+    console.log(result2);    
+} 
+
+console.log('something - 4');
+handlePromise();
+console.log('something - 5');
+```
+
+### 💻 Output
+
+```
+something - 4
+something - 1
+something - 5
+>>> (after 10 seconds)
 something - 2
 Promise resolved value
 something - 3

@@ -371,3 +371,86 @@ Promise resolved value
 something - 3
 Promise resolved value
 ```
+
+## ✨ Behind the scenes
+
+### 💻 Consider this Example
+
+```js
+const p1 = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve('Promise resolved value');
+        },10000);
+    });
+}
+
+const p2 = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve('Promise resolved value');
+        },20000);
+    });
+}
+
+async function handlePromise() {
+    console.log('INSIDE HANDLE PROMISE FUNCTION');
+    const result = await p1();
+    console.log('P1 RESOLVED');
+    console.log(result);   
+    
+    const result2 = await p2();
+    console.log('P2 RESOLVED');
+    console.log(result2);   
+} 
+
+handlePromise();
+```
+
+### ✨ Explanation
+
+### 📌 Step 1 
+
+When `handlePromise()` function pushed into callstack, it starts executing the operation in that function. this below line got executed.
+
+```js
+console.log('INSIDE HANDLE PROMISE FUNCTION');
+```
+
+![demo](/assets/demo44.png)
+
+### 📌 Step 2 
+
+* When its encountered `await`, which involves asynchronous operation such as `Promise`. 
+
+* The function is suspended and moves out of callstack. and the control is returned to the event loop.
+
+* The Execution of the function is paused, allowing other tasks to be processed.
+
+![demo](/assets/demo45.png)
+
+### 📌 Step 3
+
+* After Promise resolved after 10 seconds function again pushed into callstack and starts executing where its left.
+
+### 📌 Step 4
+
+* When its again encountered `await`, this process continues by suspending the function out of callstack. and control moves to eventloop and start other operations.
+
+* once the promise gets resolved after 20 seconds, function pushed into callstack and started executing where its left of.
+
+![demo](/assets/demo45.png)
+
+![demo](/assets/demo46.png)
+
+### 💻 Output 
+
+```
+INSIDE HANDLE PROMISE FUNCTION
+>>> (after 10 seconds)
+P1 RESOLVED
+>>> (after 20 seconds)
+P2 RESOLVED
+```
+
+### ✨ RealTime example

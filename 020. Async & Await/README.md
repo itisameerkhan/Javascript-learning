@@ -454,3 +454,47 @@ P2 RESOLVED
 ```
 
 ### ✨ RealTime example
+
+```js
+const API_URL = 'https://api.github.com/users/itisameerkhan';
+
+async function handlePromise() {
+    const data = await fetch(API_URL);
+    const json = await data.json();
+    console.log(json);  
+}
+
+handlePromise();
+```
+
+* `fetch(API_URL)` initiates a `GET` request to the specified API endpoint. The `await` keyword pauses execution until the request is complete, and the response is stored in the `data` variable. 
+
+* once the `fetch()` is resolved and fulfilled the `Response` object is returned.
+
+* Once the data is returned, again we need to `parse` the data from data Response `body` object
+
+* we need to Parse the data using `.json()`
+
+![demo](/assets/demo47.png)
+![demo](/assets/demo48.png)
+
+
+### ✨ Handle Errors
+
+When using `async/await` with the `fetch` function in JavaScript, you can handle errors by wrapping the `fetch` call in a `try-catch` block.
+
+```js
+const API_URL = 'https://api.github.com/users/itisameerkhan';
+
+async function handlePromise() {
+    try {
+        const data = await fetch(API_URL);
+        const json = await data.json();
+        console.log(json);  
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+handlePromise();
+```
